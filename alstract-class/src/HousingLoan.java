@@ -11,7 +11,21 @@ public class HousingLoan extends Loan {
 		this.collateral = collateral;
 	}
 
+	public int getPropsAge() {
+		return propsAge;
+	}
 
+	public void setPropsAge(int propsAge) {
+		this.propsAge = propsAge;
+	}
+
+	public String getCollateral() {
+		return collateral;
+	}
+
+	public void setCollateral(String collateral) {
+		this.collateral = collateral;
+	}
 
 	@Override
 	public double calculateIntrest() {
