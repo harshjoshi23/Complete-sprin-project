@@ -6,6 +6,8 @@ public class NewShowRoom extends ShowRoom {
 
 //	public NewShowRoom() {
 //		super();
+	
+	
 //	}
 // Overloasding method
 	public Automobile modelFractory(int key)
