@@ -15,16 +15,23 @@ import com.training.model.Student;
 
 import jakarta.ws.rs.*;
 
-
 @Path("/api/students")
 public class StudentResource {
+
+	StudentRepositoryImpl repo = null;
+
+	public StudentResource() {
+		super();
+		repo = new StudentRepositoryImpl();
+		// TODO Auto-generated constructor stub
+	}
+
 	@Produces(value = MediaType.APPLICATION_JSON)
 	@GET
 	public Collection<Student> findAllStudent() {
-		StudentRepositoryImpl repo = new StudentRepositoryImpl();
 		return repo.findAll();
 	}
-	
+
 //	@Produces(value = MediaType.APPLICATION_JSON)
 //	@Consumes(value = MediaType.APPLICATION_JSON)
 //	
@@ -33,26 +40,38 @@ public class StudentResource {
 //	@Path("{menu_Id}")
 //	@GET
 //	public Student getStudentBy
-	
+
 	@Produces(value = MediaType.APPLICATION_JSON)
-    @Path("/{rollNumber}")
-    @GET
-    public Student findByStudentId(@PathParam("rollNumber") int id) throws ElementNotFoundException {
-        StudentRepositoryImpl repo = new StudentRepositoryImpl();
-        return repo.findById(id);
-    }
-    
+	@Path("/{rollNumber}")
+	@GET
+	public Student findByStudentId(@PathParam("rollNumber") int id) throws ElementNotFoundException {
+		return repo.findById(id);
+	}
+
 	
-	// produces - jo user ko dere ho 
-	// consumes - jo user dega 
+	
+	// produces - jo user ko dere ho
+	// consumes - jo user dega
 	@Produces(value = MediaType.APPLICATION_JSON)
 	@Consumes(value = MediaType.APPLICATION_JSON)
 	@POST
 	public Response addStudent(Student entity) {
-		StudentRepositoryImpl repo = new StudentRepositoryImpl();
 		repo.save(entity);
-		return
-		Response.ok(entity).status(HttpStatus.CREATED_201.getStatusCode(), "Created").build();
+		return Response.ok(entity).status(HttpStatus.CREATED_201.getStatusCode(), "Created").build();
 
 	}
+
+	@DELETE
+	@Produces(value = MediaType.APPLICATION_JSON)
+	@Consumes(value = MediaType.APPLICATION_JSON)
+
+	public Response delete(Student entity) {
+		try {
+			repo.delete(entity);
+			return Response.ok().status(HttpStatus.NO_CONTENT_204.getStatusCode()).build();
+		} catch (Exception e) {
+			return Response.serverError().status(HttpStatus.BAD_REQUEST_400.getStatusCode(), e.getMessage()).build();
+		}
+	}
+
 }
