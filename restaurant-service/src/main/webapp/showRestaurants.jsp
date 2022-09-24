@@ -1,4 +1,4 @@
-<%@page import="java.util.*, com.training.model.*"%>
+<%@page import="java.util.*,com.project.model.*"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     
